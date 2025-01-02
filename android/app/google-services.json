@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "897707411351",
+    "project_id": "dapurku-64c1f",
+    "storage_bucket": "dapurku-64c1f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897707411351:android:769c79206d19c1ceb3a6d2",
+        "android_client_info": {
+          "package_name": "com.example.dapurku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8iGhRIz7l5Mawy4OC2NNq1upZoeCqCEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

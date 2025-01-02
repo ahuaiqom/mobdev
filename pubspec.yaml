@@ -1,0 +1,41 @@
+name: dapurku
+description: "A new Flutter project."
+
+# Where to publish the package; 'none' means it's a private project
+publish_to: 'none'
+
+# Version of the application
+version: 1.0.0+1
+
+# Flutter SDK version constraints
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+# Dependencies for the project
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  firebase_core: ^3.9.0
+  firebase_auth: ^5.3.4
+  firebase_database: ^11.2.0
+  provider: ^6.0.5
+
+# Development dependencies
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+# Flutter-specific configurations
+flutter:
+  uses-material-design: true
+
+  # Asset declarations
+  assets:
+    - lib/images/rendang.jpg
+    - lib/images/gulai.jpg
+    - lib/images/udang.jpg
+    - lib/images/krawu.jpg
+    - lib/images/tomyum.jpg
+    - lib/images/nasilemak.jpg
