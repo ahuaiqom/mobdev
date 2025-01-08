@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'history_page.dart'; // Import halaman HistoryPage
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SavedRecipePage extends StatefulWidget {
   final List<Map<String, dynamic>> savedRecipes;
@@ -37,6 +38,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
       filterRecipes(searchController.text);
     });
   }
+  
 
   void filterRecipes(String query) {
     setState(() {

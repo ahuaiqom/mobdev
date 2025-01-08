@@ -74,13 +74,15 @@ class _PaymentDetailPageState extends State<PaymentDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Payment Details'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  resizeToAvoidBottomInset: true, // Pastikan ini diatur
+  appBar: AppBar(
+    title: const Text('Payment Details'),
+  ),
+  body: SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: RecipeSummary(
@@ -147,7 +149,7 @@ class _PaymentDetailPageState extends State<PaymentDetailPage> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
 
@@ -167,7 +169,7 @@ class RecipeSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.network(
+        Image.asset(
           imageUrl,
           height: 150,
           fit: BoxFit.cover,

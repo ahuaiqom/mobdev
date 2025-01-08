@@ -8,6 +8,8 @@ import 'saved_recipe_page.dart';
 import 'paid_recipe.dart';
 import 'package:provider/provider.dart';
 import 'recipe_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'user_page.dart'; // Import halaman user_page
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Map<String, dynamic>> recipes = [
     {
-      "title": "Rendang",
+    "title": "Rendang",
     "location": "Padang, Indonesia",
     "rating": 4.8,
     "image": "lib/images/rendang.jpg",
@@ -25,9 +27,26 @@ class _HomePageState extends State<HomePage> {
     "cookingTime": "3 hours",
     "isFavorite": false,
     "isPaid": false,
-    "ingredients": ["Beef", "Coconut milk", "Spices"],
-    "instructions": ["Cut beef", "Cook with spices", "Simmer"],
-    "difficulty": "Hard",
+    "ingredients": [
+      "Beef",
+      "Coconut milk",
+      "Spices",
+      "Shallots",
+      "Garlic",
+      "Ginger",
+      "Turmeric",
+      "Lemongrass",
+      "Coriander"
+    ],
+    "instructions": [
+      "Cut beef into cubes",
+      "Grind shallots, garlic, ginger, and turmeric",
+      "Cook the paste in a pot",
+      "Add beef and coconut milk",
+      "Simmer for 3 hours, stirring occasionally",
+      "Serve with rice"
+    ],
+    "difficulty": "Hard"
   },
   {
     "title": "Gulai",
@@ -38,9 +57,26 @@ class _HomePageState extends State<HomePage> {
     "cookingTime": "1.5 hours",
     "isFavorite": false,
     "isPaid": false,
-    "ingredients": ["Meat", "Coconut milk", "Spices"],
-    "instructions": ["Prepare meat", "Cook curry", "Serve hot"],
-    "difficulty": "Medium",
+    "ingredients": [
+      "Meat (beef, chicken, or goat)",
+      "Coconut milk",
+      "Spices",
+      "Shallots",
+      "Garlic",
+      "Chili",
+      "Ginger",
+      "Lemongrass",
+      "Turmeric"
+    ],
+    "instructions": [
+      "Prepare meat by cutting it into pieces",
+      "Grind shallots, garlic, chili, and ginger into a paste",
+      "Cook the paste with spices",
+      "Add meat and cook until tender",
+      "Pour in coconut milk and simmer",
+      "Serve hot with steamed rice"
+    ],
+    "difficulty": "Medium"
   },
   {
     "title": "Nasi Goreng Udang",
@@ -51,9 +87,26 @@ class _HomePageState extends State<HomePage> {
     "cookingTime": "30 minutes",
     "isFavorite": false,
     "isPaid": false,
-    "ingredients": ["Rice", "Shrimp", "Soy sauce"],
-    "instructions": ["Cook shrimp", "Fry rice with spices", "Serve hot"],
-    "difficulty": "Easy",
+    "ingredients": [
+      "Rice",
+      "Shrimp",
+      "Soy sauce",
+      "Eggs",
+      "Garlic",
+      "Shallots",
+      "Green onions",
+      "Chili",
+      "Vegetable oil"
+    ],
+    "instructions": [
+      "Cook shrimp and set aside",
+      "Fry garlic, shallots, and chili in a pan",
+      "Add rice and stir-fry with soy sauce",
+      "Push rice to the side and scramble eggs in the same pan",
+      "Add shrimp and green onions",
+      "Serve hot with extra chili on the side"
+    ],
+    "difficulty": "Easy"
   },
   {
     "title": "Nasi Lemak",
@@ -64,9 +117,24 @@ class _HomePageState extends State<HomePage> {
     "cookingTime": "1 hour",
     "isFavorite": false,
     "isPaid": false,
-    "ingredients": ["Rice", "Coconut milk", "Anchovies", "Egg"],
-    "instructions": ["Cook rice in coconut milk", "Prepare sides", "Serve with sambal"],
-    "difficulty": "Medium",
+    "ingredients": [
+      "Rice",
+      "Coconut milk",
+      "Anchovies",
+      "Egg",
+      "Peanuts",
+      "Sambal",
+      "Cucumber"
+    ],
+    "instructions": [
+      "Rinse the rice and cook it in coconut milk until tender",
+      "Fry anchovies until crispy and set aside",
+      "Fry peanuts in oil until golden and set aside",
+      "Boil eggs until hard-boiled and peel",
+      "Slice cucumber into thin pieces",
+      "Serve the rice with sambal, fried anchovies, peanuts, cucumber, and boiled egg"
+    ],
+    "difficulty": "Medium"
   },
   {
     "title": "Nasi Krawu",
@@ -78,9 +146,26 @@ class _HomePageState extends State<HomePage> {
     "isFavorite": false,
     "isPaid": true,
     "price": "MYR 10",
-    "ingredients": ["Beef", "Rice", "Coconut"],
-    "instructions": ["Cook beef", "Prepare rice", "Serve with sambal"],
-    "difficulty": "Medium",
+    "ingredients": [
+      "Beef",
+      "Rice",
+      "Coconut milk",
+      "Shallots",
+      "Garlic",
+      "Turmeric",
+      "Chili",
+      "Coriander",
+      "Lime leaves"
+    ],
+    "instructions": [
+      "Cut beef into pieces and cook until tender",
+      "Grind shallots, garlic, and chili into a paste",
+      "Sauté the paste with turmeric and coriander until fragrant",
+      "Add cooked beef and coconut milk to the paste, simmer until the beef absorbs the flavors",
+      "Prepare rice and serve with shredded beef",
+      "Garnish with lime leaves and sambal on the side"
+    ],
+    "difficulty": "Medium"
   },
   {
     "title": "Tom Yum",
@@ -92,10 +177,26 @@ class _HomePageState extends State<HomePage> {
     "isFavorite": false,
     "isPaid": true,
     "price": "MYR 15",
-    "ingredients": ["Shrimp", "Lemongrass", "Lime", "Chili"],
-    "instructions": ["Boil broth", "Add ingredients", "Simmer until cooked"],
-    "difficulty": "Medium",
-    },
+    "ingredients": [
+      "Shrimp",
+      "Lemongrass",
+      "Lime leaves",
+      "Chili",
+      "Fish sauce",
+      "Tomato",
+      "Mushrooms",
+      "Galangal",
+      "Coriander"
+    ],
+    "instructions": [
+      "Boil broth with lemongrass, lime leaves, and galangal for flavor",
+      "Add shrimp, mushrooms, and tomatoes, cook until shrimp is tender",
+      "Season with fish sauce and chili to taste",
+      "Simmer until the soup is fragrant and all ingredients are cooked through",
+      "Serve hot, garnished with fresh coriander and lime wedges"
+    ],
+    "difficulty": "Medium"
+  },
   ];
   
   List<Map<String, dynamic>> historyItems = []; // Untuk menyimpan riwayat
@@ -106,10 +207,25 @@ class _HomePageState extends State<HomePage> {
   int selectedCategoryIndex = 0;
 
   @override
-  void initState() {
-    super.initState();
-    filteredRecipes = recipes;
+void initState() {
+  super.initState();
+  _loadFavoriteRecipes();
+  filteredRecipes = recipes;
+}
+
+void _loadFavoriteRecipes() async {
+  final prefs = await SharedPreferences.getInstance();
+  List<String>? favoriteTitles = prefs.getStringList('favoriteRecipes');
+
+  if (favoriteTitles != null) {
+    setState(() {
+      for (var recipe in recipes) {
+        recipe["isFavorite"] =
+            favoriteTitles.contains(recipe["title"]);
+      }
+    });
   }
+}
 
   void filterRecipes(String query) {
     setState(() {
@@ -125,17 +241,25 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-   void toggleFavorite(int index) {
-    setState(() {
-      recipes[index]["isFavorite"] = !recipes[index]["isFavorite"];
-      if (recipes[index]["isFavorite"]) {
-        savedRecipes.add(recipes[index]);
-      } else {
-        savedRecipes.removeWhere((recipe) =>
-            recipe["title"] == recipes[index]["title"]);
-      }
-    });
-  }
+   void toggleFavorite(int index) async {
+  setState(() {
+    recipes[index]["isFavorite"] = !recipes[index]["isFavorite"];
+    if (recipes[index]["isFavorite"]) {
+      savedRecipes.add(recipes[index]);
+    } else {
+      savedRecipes.removeWhere((recipe) =>
+          recipe["title"] == recipes[index]["title"]);
+    }
+  });
+
+  // Simpan data favorit ke SharedPreferences
+  final prefs = await SharedPreferences.getInstance();
+  List<String> favoriteTitles = recipes
+      .where((recipe) => recipe["isFavorite"])
+      .map((recipe) => recipe["title"] as String)
+      .toList();
+  await prefs.setStringList('favoriteRecipes', favoriteTitles);
+}
 
   void selectCategory(int index) {
     setState(() {
@@ -155,54 +279,53 @@ class _HomePageState extends State<HomePage> {
  
   int _currentIndex = 0;
 
-   void _onItemTapped(int index) async {
-  if (index == 1) { // Navigasi ke HistoryPage
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HistoryPage(
-          recipes: recipes,
-          historyItems: [], // Sesuaikan jika ada data history
-          onRemoveHistory: (String) {}, // Sesuaikan jika perlu fungsi penghapusan
+  void _onItemTapped(int index) async {
+    if (index == 1) {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HistoryPage(
+            recipes: recipes,
+            historyItems: historyItems,
+            onRemoveHistory: (String title) {
+              setState(() {
+                historyItems.removeWhere((recipe) => recipe["title"] == title);
+              });
+            },
+          ),
         ),
-      ),
-    );
-    // Setelah kembali dari HistoryPage, sinkronkan data favorit
-    setState(() {
-      for (var recipe in recipes) {
-        recipe["isFavorite"] = savedRecipes.any((saved) => saved["title"] == recipe["title"]);
-      }
-    });
-  } else if (index == 2) { // Navigasi ke SavedRecipePage
-    final updatedRecipes = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SavedRecipePage(
-          savedRecipes: savedRecipes,
-          onRemoveFavorite: (title) {
-            setState(() {
-              recipes.firstWhere((recipe) => recipe["title"] == title)["isFavorite"] = false;
-              savedRecipes.removeWhere((recipe) => recipe["title"] == title);
-            });
-          }, historyItems: [], onRemoveHistory: (String ) {  },
+      );
+    } else if (index == 2) {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SavedRecipePage(
+            savedRecipes: savedRecipes,
+            onRemoveFavorite: (title) {
+              setState(() {
+                recipes.firstWhere((recipe) => recipe["title"] == title)["isFavorite"] = false;
+                savedRecipes.removeWhere((recipe) => recipe["title"] == title);
+              });
+            },
+            historyItems: [],
+            onRemoveHistory: (String) {},
+          ),
         ),
-      ),
-    );
-
-    if (updatedRecipes != null) {
+      );
+    } else if (index == 3) {
+      // Navigasi ke UserPage
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UserPage(), // Navigasi ke UserPage
+        ),
+      );
+    } else {
       setState(() {
-        savedRecipes = updatedRecipes;
-        for (var recipe in recipes) {
-          recipe["isFavorite"] = savedRecipes.any((saved) => saved["title"] == recipe["title"]);
-        }
+        _currentIndex = index;
       });
     }
-  } else {
-    setState(() {
-      _currentIndex = index;
-    });
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -223,14 +346,24 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.green,
-                    child: Icon(Icons.person, color: Colors.white),
-                  ),
-                ],
-              ),
+  mainAxisAlignment: MainAxisAlignment.end,
+  children: [
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UserPage(), // Navigasi ke UserPage
+          ),
+        );
+      },
+      child: CircleAvatar(
+        backgroundColor: Colors.blue,
+        child: Icon(Icons.person, color: Colors.white),
+      ),
+    ),
+  ],
+),
               SizedBox(height: 8),
               Text(
                 "Hi, Ahua!",
